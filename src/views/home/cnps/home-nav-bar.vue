@@ -6,13 +6,7 @@
         <div class="banner">
             <img src="@/assets/img/home/banner.webp" alt="">
         </div>
-        <div class="location">
-            <div class="city">成都</div>
-            <div class="postion">
-                <span class="text">我的位置</span>
-                <img src="@/assets/img/home/icon_location.png" alt="">
-            </div>
-        </div>
+       
    </div>
    
 </template>
@@ -43,32 +37,6 @@
         }
 
       
-        .location {
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            height: 44px;
-            .city {
-                flex: 1;
-            }
-
-            .postion{ 
-                width: 74px;
-                display: flex;
-                align-items: center;
-
-                img{
-                    margin-left: 5px;
-                    width: 18px;
-                    height: 18px;
-                }
-                .text {
-                    position: relative;
-                    top: 2px;
-                    font-size: 12px;
-
-                }
-            }
-        }
+       
     }
 </style>
