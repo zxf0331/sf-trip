@@ -12,6 +12,7 @@
     "dayjs": "^1.11.10",
     "normalize.css": "^8.0.1",
     "pinia": "^2.1.6",
+    "underscore": "^1.13.6",
     "vant": "^4.6.8",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
@@ -20,6 +21,7 @@
     "@vant/auto-import-resolver": "^1.0.1",
     "@vitejs/plugin-vue": "^4.3.4",
     "less": "^4.2.0",
+    "postcss-px-to-viewport": "^1.1.1",
     "unplugin-vue-components": "^0.25.2",
     "vite": "^4.4.9"
   }

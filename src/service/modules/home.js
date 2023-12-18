@@ -16,7 +16,7 @@ export function getHomeHouselist(page) {
   return hyRequest.get({
     url: "/home/houselist",
     params: {
-      page,
+      page: page
     },
   });
 }

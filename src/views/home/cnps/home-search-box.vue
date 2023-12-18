@@ -6,7 +6,7 @@
             <div class="postion" @click="positionClick">
                 <span class="text">我的位置</span>
                 <img src="@/assets/img/home/icon_location.png" alt="">
-            </div>
+            </div> 
         </div>
 
         <!-- 日期范围 -->
@@ -46,10 +46,10 @@
                 <span class="tag" :style="{ color: item.tagText.color}">{{ item.tagText.text }}</span>
             </template>
         </div>
-
-        <!-- <div class="section search-btn">
-            <div class="btn" @click="startSearch">开始搜索</div>
-        </div> -->
+        <!-- 搜索按钮 -->
+        <div class="section search-btn">
+            <div class="btn" @click="searchClick">开始搜索</div>
+        </div>
     </div>
 </template>
 
@@ -58,8 +58,9 @@
     import useCityStore from "@/store/modules/city"
     import { storeToRefs } from "pinia";
     import { formatMathDate, getDiffDays } from "@/utils/format_date"
-    import { ref } from "vue"
+    import { ref, computed } from "vue"
     import useHomeStore from "@/store/modules/home"
+    import useMainStore from "@/store/modules/main"
  
     const router = useRouter()
 
@@ -79,13 +80,12 @@
     }
 
     //日期处理
-    const nowDate = new Date()
-    const leaveDate = new Date()
-    leaveDate.setDate(nowDate.getDate() + 1)
+    const mainStore = useMainStore()
+    const { nowDate, leaveDate } = storeToRefs(mainStore)
 
-    const startDate = ref(formatMathDate(nowDate))
-    const endDate = ref(formatMathDate(leaveDate))
-    const stayCount = ref(getDiffDays(nowDate, leaveDate))
+    const startDate = computed(() => formatMathDate(nowDate.value))
+    const endDate = computed(() => formatMathDate(leaveDate.value))
+    const stayCount = ref(getDiffDays(nowDate.value, leaveDate.value))
 
 
 
@@ -95,8 +95,8 @@
         //1.设置日期
         const selectStartDate = value[0]
         const selectEndDate = value[1]
-        startDate.value = formatMathDate(selectStartDate)
-        endDate.value = formatMathDate(selectEndDate)
+        mainStore.nowDate = selectStartDate
+        mainStore.leaveDate = selectEndDate
         stayCount.value = getDiffDays(selectStartDate, selectEndDate)
         //2.隐藏日历
         showCalendar.value = false
@@ -112,6 +112,18 @@
     const homeStore = useHomeStore()
     const { hotSuggests } = storeToRefs(homeStore)
     
+
+    //搜索功能
+    const searchClick = () => {
+        router.push({
+            path: "/search",
+            query: {
+                startDate: startDate.value,
+                endDate: endDate.value,
+                currentCity: currentCity.value.cityName
+            }
+        })
+    }
  
 </script>
 
@@ -190,7 +202,7 @@
     color: #fff;
     background-image: var(
       --tjc-theme-linear-gradient,
-      linear-gradient(90deg, #fa8c1d, #fcaf3f)
+      var(--theme-linear-gradient)
     );
   }
 }

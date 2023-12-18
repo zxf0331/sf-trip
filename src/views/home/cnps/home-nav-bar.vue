@@ -1,7 +1,7 @@
 <template>
    <div class="home">
         <div class="nav-bar">
-            <span class="title">宏源旅途</span>
+            <span class="title">顺风旅途</span>
         </div>
         <div class="banner">
             <img src="@/assets/img/home/banner.webp" alt="">
